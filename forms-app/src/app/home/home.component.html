@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <h3>Employee Form</h3>
+
+  <form #form="ngForm" (submit)="onSubmit(form)" novalidate>
+    <div class="form-group" [class.has-error]="firstname.invalid && firstname.touched">
+      <label class="control-label" for="firstname">First Name</label>
+      <input #firstname="ngModel" type="text" required class="form-control" name="firstname" id="firstname" [(ngModel)]="employee.firstname"
+      />
+      <div class="alert alert-danger" *ngIf="firstname.invalid && firstname.touched">
+        First Name is requred.
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="firstname.invalid && firstname.touched">
+      <label class="control-label" for="lastname">Last Name</label>
+      <input #lastname="ngModel" type="text" required class="form-control" name="lastname" [(ngModel)]="employee.lastname" />
+      <div class="alert alert-danger" *ngIf="lastname.invalid && lastname.touched">
+        Last Name is requred.
+      </div>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="isfulltime" [(ngModel)]=employee.isFullTime> Full Time Employee
+      </label>
+    </div>
+
+    <label>Payment Type:</label>
+    <div class="radio">
+      <label>
+        <input type="radio" name="paytype" value="w2" [(ngModel)]="employee.payType"> W2
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="paytype" value="1099" [(ngModel)]="employee.payType"> 1099
+      </label>
+    </div>
+
+    <div class="form-group" [class.has-error]="employee.language === 'default' && (primaryLanguage.dirty || primaryLanguage.touched)">
+      <label class="control-label" for="primaryLanguage">Primary Language</label>
+      <select #primaryLanguage="ngModel" class="form-control" name="primaryLanguage" id="primaryLanguage" [(ngModel)]="employee.language" required>
+        <option value="default">Choose any one</option>
+        <option *ngFor="let lang of languages">
+          {{lang}}
+        </option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>&nbsp;
+  </form>
+
+  <!-- 
+  <div>Model: {{ employee | json }}</div>
+  <br>
+  <div>Angular: {{ form.value | json }}</div>
+  <br>
+  <div>
+    <h3>Classes / ngModel Properties</h3>
+    <h4>{{firstname.className}}</h4>
+    <h4>{{firstname.invalid}}</h4>
+  </div>
+  <div>
+    <h3>Form Properties</h3>
+    <h4>{{form.valid}}</h4>
+  </div> 
+  -->
+
+</div>
